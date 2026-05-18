@@ -1,0 +1,65 @@
+.mainContainer {
+  max-width: 800px;
+  margin-bottom: 20px
+}
+
+.inputGroupWrapper {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.inputGroupWrapper:focus-within {
+  border-color: #198754;
+
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.15) !important;
+}
+
+.categoryCard {
+  background: #ffffff;
+  border: 0.2px solid #e6e6ff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  transition: all 0.3s ease-in-out;
+}
+
+.categoryCard:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 1px 10px #b8b8b8;
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #524be6;
+  background-color: #e6e6ff;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.categoryText {
+  color: #212529;
+  font-size: 1rem;
+}
+
+.deleteBtn {
+  background: none;
+  border: none;
+  color: #adb5bd;
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease-in-out;
+}
+
+.deleteBtn:hover {
+  color: #dc3545;
+  background-color: #f8d7da;
+}
+
+

@@ -1,0 +1,94 @@
+.wrapper {
+  position: relative;
+}
+
+.preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.selectedIcon {
+  width: 55px;
+  height: 55px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 10px;
+  background: white;
+
+  font-size: 22px;
+  color: #2563eb;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+.iconContainer {
+  width: 440px;
+  padding: 24px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  border-radius: 14px;
+  background: #f6f6f6;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.iconCard {
+  width: 55px;
+  height: 55px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 2px solid transparent;
+  border-radius: 10px;
+
+  background: white;
+  cursor: pointer;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+}
+
+.iconCard:hover {
+  transform: translateY(-2px);
+}
+
+.icon {
+  font-size: 22px;
+  color: #2563eb;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.active {
+  border-color: #2563eb;
+  background: #eff6ff;
+  transform: scale(1.05);
+}
+
+.saveBtn {
+  width: 100%;
+  margin-top: 10px;
+}

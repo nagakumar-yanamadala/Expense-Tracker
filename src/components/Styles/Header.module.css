@@ -1,0 +1,91 @@
+/* Clean white background matching the new logo's base canvas */
+.headerContainer {
+  width: 100%;
+  background-color: #ffffff;
+  border-bottom: 1px solid #f1f5f9;
+  /* Soft grey-blue border for layout division */
+  padding: 0 2rem;
+}
+
+/* Main header frame alignment */
+.header {
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 76px;
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logoImage {
+  height: 48px;
+  /* Scales width precisely based on 682x248 geometry */
+  width: auto;
+  object-fit: contain;
+}
+
+/* Nav Item Layouts */
+.navList {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 1.25rem;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+}
+
+/* Link Styling - Inherits the deep Midnight Blue from the word 'Expense' */
+.navLink {
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #1e293b;
+  /* Sleek slate/midnight shade */
+  padding: 0.5rem 0.85rem;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Hover effect - Smooth transition to the electric blue tone of 'Tracker' */
+.navLink:hover {
+  color: #286af9;
+  background-color: #f8fafc;
+  /* Very soft light grey hover backdrop */
+}
+
+/* Active route styling - Uses a premium gradient matching the logo theme */
+.navLink.active {
+  color: #ffffff;
+  font-weight: 600;
+  /* Transitions from the electric blue to a deeper navy blue */
+  background: linear-gradient(180deg, #5facfa 0%, #286af9 100%);
+
+  /* Soft professional drop shadow tinted to match the new gradient */
+  box-shadow: 0 4px 12px rgba(49, 152, 255, 0.3);
+}
+
+/* Responsive adjustments for mobile responsiveness */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    height: auto;
+    padding: 1.25rem 0;
+    gap: 1rem;
+  }
+
+  .navList {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

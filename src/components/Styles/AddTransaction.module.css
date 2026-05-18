@@ -1,0 +1,151 @@
+/* Core container styling - Glassmorphism effect */
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  transition: transform 0.3s ease;
+}
+
+/* Row alignment and spacing */
+.row1 {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  align-items: flex-end;
+}
+
+/* Custom form control treatments (inputs, selects, dropdowns) */
+.container :global(.form-label) {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #4a5568;
+  margin-bottom: 0.5rem;
+}
+
+.container :global(.form-control),
+.container :global(.form-select),
+.container :global(.btn-primary.dropdown-toggle) {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+  color: #2d3748;
+  background-color: #f8fafc;
+  transition: all 0.2s ease-in-out;
+}
+
+.container :global(.form-control:focus),
+.container :global(.form-select:focus) {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  background-color: #ffffff;
+}
+
+/* Radio button segment controls (Modern toggle style) */
+.radio {
+  display: flex;
+  background: #f1f5f9;
+  padding:4px;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: space-around;
+
+  /* Matches input heights perfectly */
+}
+
+.radio :global(.form-check) {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.radio :global(.form-check-input) {
+  display: none;
+  /* Hide standard ugly radio buttons */
+}
+
+.radio :global(.form-check-label) {
+  width: 100%;
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #64748b;
+  transition: all 0.2s ease;
+}
+
+/* Dynamically styled states via Bootstrap attributes combined with CSS */
+.radio :global(.form-check-input:checked + .form-check-label) {
+  background: #ffffff;
+  color: #4f46e5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Category dropdown overrides */
+.container :global(.btn-primary.dropdown-toggle) {
+  background: #f8fafc;
+  color: #2d3748;
+  display: flex;
+  align-items: center;
+  border-color: #e2e8f0;
+}
+
+.container :global(.btn-primary.dropdown-toggle:after) {
+  margin-left: auto;
+  /* Pushes arrow to the far right */
+  color: #94a3b8;
+}
+
+.container :global(.dropdown-menu) {
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.container :global(.dropdown-item) {
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  color: #4a5568;
+  transition: background 0.2s;
+}
+
+.container :global(.dropdown-item:hover) {
+  background-color: #f1f5f9;
+  color: #1e1b4b;
+}
+
+/* Submit Button Treatment */
+.container :global(.btn-primary[type="submit"]) {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  border: none;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+  transition: all 0.2s ease;
+}
+
+.container :global(.btn-primary[type="submit"]:hover) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+}
+
+.container :global(.btn-primary[type="submit"]:active) {
+  transform: translateY(1px);
+}

@@ -1,0 +1,92 @@
+.walletContainer {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.header h1 {
+  font-weight: 700;
+  color: #212529;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Input Row styling */
+.inputGroup {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 2rem;
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.inputGroup input {
+  padding: 0.6rem 1rem;
+  border: 1px solid #dee2e6;
+}
+
+.inputGroup button {
+  white-space: nowrap;
+  padding: 0.6rem 1.5rem;
+  font-weight: 500;
+}
+
+/* List/Table Styles */
+.walletList {
+  margin-top: 1rem;
+}
+
+.listHeader {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  color: #6c757d;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.listItem {
+  padding: 1rem;
+  background-color: #fff;
+  border-bottom: 1px solid #edf2f7;
+  transition: background-color 0.2s ease;
+}
+
+.listItem:hover {
+  background-color: #f8f9fa;
+}
+
+.walletName {
+  font-weight: 500;
+  color: #333;
+}
+
+.walletBalance {
+  color: #198754;
+  font-weight: 600;
+}
+
+/* Interactions */
+.deleteButton {
+  color: #dc3545;
+  cursor: pointer;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.deleteButton:hover {
+  color: #a71d2a;
+  transform: scale(1.15);
+}
+
+.emptyMessage {
+  text-align: center;
+  color: #adb5bd;
+  margin-top: 2rem;
+  font-style: italic;
+}
