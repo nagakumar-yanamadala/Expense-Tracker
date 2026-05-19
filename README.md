@@ -179,15 +179,9 @@ npm run dev
 
 ## 📸 Screenshots
 
-### Dashboard
+### 🏠 Dashboard
 
-Add screenshots here:
-
-```md
 ![Dashboard](./screenshots/dashboard.png)
-```
-
----
 
 ## 🔮 Future Improvements
 
