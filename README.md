@@ -201,7 +201,7 @@ Undergraduate Student at IIT Kharagpur
 Passionate about Web Development and UI Design
 
 LinkedIn:  
-https://www.linkedin.com/in/nagakumar-yan/
+https://www.linkedin.com/in/nagakumar-yanamadala/
 
 ---
 
