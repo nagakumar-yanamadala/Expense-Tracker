@@ -4,15 +4,12 @@ import styles from "./Styles/IconSelector.module.css";
 import { iconMap } from "../store/iconMap";
 
 function IconSelector({ handleSelectedIcon }) {
-  // convert object into array
   const iconArray = Object.entries(iconMap);
 
-  // default selected icon
   const [selectedIcon, setSelectedIcon] = useState(iconArray[0]);
 
   const [isOpen, setIsOpen] = useState(false);
 
-  // preview component
   const PreviewIcon = selectedIcon[1];
 
   return (
@@ -73,7 +70,6 @@ function IconSelector({ handleSelectedIcon }) {
               onClick={() => {
                 setIsOpen(false);
 
-                // send only icon name
                 handleSelectedIcon(selectedIcon[0]);
               }}
             >

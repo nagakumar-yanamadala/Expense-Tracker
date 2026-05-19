@@ -1,37 +1,86 @@
-/* Styles/TransactionItem.css */
+:root {
+  --bg-card: #ffffff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --border-subtle: rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
+  --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  --radius-custom: 16px;
+}
+
+.history-title {
+  letter-spacing: -0.03em;
+  font-weight: 800 !important;
+  color: var(--text-main) !important;
+}
+
+.filter-card {
+  background-color: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  box-shadow: var(--shadow-sm) !important;
+  border-radius: var(--radius-custom) !important;
+}
+
+.filter-card .form-control,
+.filter-card .form-select {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  transition: all 0.2s ease-in-out;
+}
+
+.filter-card .form-control:focus,
+.filter-card .form-select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
 
 .transaction-card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  background-color: #ffffff;
-  width: 1000px;
-  align-self: center;
+  width: 100% !important;
+  border-radius: var(--radius-custom) !important;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle) !important;
+  box-shadow: var(--shadow-sm) !important;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Subtle elevation lift when hovering over a transaction item */
 .transaction-card:hover {
-  transform: translateY(-0.1px);
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08) !important;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md) !important;
 }
 
-/* Smooth fade-in for the detail panel */
+.bg-danger-subtle {
+  background-color: #fef2f2 !important;
+  color: #ef4444 !important;
+}
+
+.bg-success-subtle {
+  background-color: #f0fdf4 !important;
+  color: #22c55e !important;
+}
+
+.card-details-footer {
+  background-color: #f8fafc !important;
+  border-top: 1px dashed #e2e8f0 !important;
+  border-bottom-left-radius: var(--radius-custom) !important;
+  border-bottom-right-radius: var(--radius-custom) !important;
+}
+
 .animate-fade-in {
-  animation: fadeIn 0.25s ease-out forwards;
+  animation: fadeIn 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(-5px);
+    transform: translateY(-8px);
   }
 
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@media (max-width: 1000px) {
-  .transaction-card{
-    width: 95%;
   }
 }

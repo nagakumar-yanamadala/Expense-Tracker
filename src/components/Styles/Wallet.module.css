@@ -15,7 +15,7 @@
   text-align: center;
 }
 
-/* Input Row styling */
+/* Input Row */
 .inputGroup {
   display: flex;
   gap: 12px;
@@ -72,7 +72,6 @@
   font-weight: 600;
 }
 
-/* Interactions */
 .deleteButton {
   color: #dc3545;
   cursor: pointer;

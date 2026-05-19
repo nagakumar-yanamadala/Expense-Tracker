@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { deleteTransaction } from "../store/transactionSlice";
 import { useState } from "react";
 import { iconMap } from "../store/iconMap";
+import { incomeUpdate, expenseUpdate } from "../store/totalSlice";
+import { updateWalletBalance } from "../store/walletSlice";
 
 const TransactionItem = ({ transaction }) => {
   const dispatch = useDispatch();
@@ -10,16 +12,41 @@ const TransactionItem = ({ transaction }) => {
 
   const { Amount, isExpense, Date, Category, Wallet, Id } = transaction;
 
-  // Safeguard in case the icon mapping isn't found
   const Icon = iconMap[Category?.icon] || null;
 
+  function handleDelete(Id) {
+    const amount = Number(Amount);
+
+    if (isExpense) {
+      dispatch(expenseUpdate(-amount));
+      dispatch(
+        updateWalletBalance({
+          name: Wallet.name,
+          amount: amount,
+        }),
+      );
+    } else {
+      dispatch(incomeUpdate(-amount));
+      dispatch(
+        updateWalletBalance({
+          name: Wallet.name,
+          amount: -amount,
+        }),
+      );
+    }
+
+    dispatch(deleteTransaction(Id));
+  }
+
   return (
-    <div className="card shadow-sm mb-3 border-0 rounded-3 transaction-card pb-3 px-3 ">
-      <div className="card-body d-flex flex-wrap align-items-center justify-content-between gap-3">
+    <div className="card transaction-card">
+      <div className="card-body d-flex flex-wrap align-items-center justify-content-between gap-3 p-3">
         {/* Left Side: Icon & Meta Info */}
-        <div className="d-flex align-items-center gap-3 ">
+        <div className="d-flex align-items-center gap-3">
           <div
-            className={`p-3 rounded-circle d-flex align-items-center justify-content-center bg-light ${isExpense ? "text-danger" : "text-success"}`}
+            className={`p-3 rounded-circle d-flex align-items-center justify-content-center bg-light ${
+              isExpense ? "text-danger" : "text-success"
+            }`}
             style={{ width: "50px", height: "50px" }}
           >
             {Icon ? <Icon size={22} /> : <span>💰</span>}
@@ -35,21 +62,28 @@ const TransactionItem = ({ transaction }) => {
         {/* Middle: Amount & Status Badge */}
         <div className="text-md-end">
           <div
-            className={`fs-5 fw-bold mb-1 ${isExpense ? "text-danger" : "text-success"}`}
+            className={`fs-5 fw-bold mb-1 ${
+              isExpense ? "text-danger" : "text-success"
+            }`}
           >
             {isExpense ? "- " : "+ "}₹{Amount.toLocaleString("en-IN")}
           </div>
           <span
-            className={`badge rounded-pill ${isExpense ? "bg-danger-subtle text-danger" : "bg-success-subtle text-success"}`}
+            className={`badge rounded-pill ${
+              isExpense
+                ? "bg-danger-subtle text-danger"
+                : "bg-success-subtle text-success"
+            }`}
           >
             {isExpense ? "Debited" : "Credited"}
           </span>
         </div>
 
+        {/* Right Side: Action Buttons */}
         <div className="d-flex gap-2 w-100 w-md-auto justify-content-end align-items-center">
           <button
             type="button"
-            className="btn btn-sm btn-primary "
+            className="btn btn-sm btn-primary"
             onClick={() => setShowDetails(!showDetails)}
           >
             {showDetails ? "Hide Details" : "Show Details"}
@@ -59,13 +93,7 @@ const TransactionItem = ({ transaction }) => {
             type="button"
             className="btn btn-sm btn-outline-danger d-flex align-items-center gap-1"
             onClick={() => {
-              if (
-                window.confirm(
-                  "Are you sure you want to delete this transaction?",
-                )
-              ) {
-                dispatch(deleteTransaction(Id));
-              }
+              handleDelete(Id);
             }}
           >
             Delete
@@ -74,7 +102,7 @@ const TransactionItem = ({ transaction }) => {
       </div>
 
       {showDetails && (
-        <div className="card-footer bg-light border-0 px-4 py-3 animate-fade-in">
+        <div className="card-footer card-details-footer px-4 py-3 animate-fade-in">
           <div className="row g-2">
             <div className="col-6 col-sm-4">
               <span className="text-muted d-block small">Category</span>
@@ -87,7 +115,7 @@ const TransactionItem = ({ transaction }) => {
               <span className="text-muted d-block small">Payment Method</span>
               <span className="fw-medium text-dark">💳 {Wallet?.name}</span>
             </div>
-            <div className="col-10 col-sm-4">
+            <div className="col-12 col-sm-4">
               <span className="text-muted d-block small">Transaction ID</span>
               <span className="font-monospace small text-secondary">{Id}</span>
             </div>

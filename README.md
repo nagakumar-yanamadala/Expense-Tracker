@@ -1,16 +1,216 @@
-# React + Vite
+# 💸 Expense Tracker App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and responsive Expense Tracker web application built using **React.js** and **Redux Toolkit** with interactive charts, wallet management, category tracking, and smooth UI design.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🌐 Live Demo
 
-## React Compiler
+🔗 https://expense-tracker-628.netlify.app/
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 💰 Transaction Management
+- Add income and expense transactions
+- Delete transactions
+- Real-time balance updates
+- Transaction history tracking
+
+### 📊 Analytics Dashboard
+- Expense breakdown using Pie Charts
+- Monthly Income vs Expense Bar Graph
+- Interactive financial overview
+
+### 🏷️ Category Management
+- Add custom categories
+- Select custom icons and colors
+- Delete categories
+
+### 👛 Wallet Management
+- Manage wallet balances
+- Track overall current balance
+
+### 🔍 Search & Filters
+- Search transactions
+- Filter transaction history
+
+### 🎨 Modern UI
+- Smooth and responsive interface
+- Premium dashboard design
+- Bootstrap styling
+- Material UI Charts integration
+- Custom alerts and animations
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology | Usage |
+|---|---|
+| React.js | Frontend Framework |
+| Redux Toolkit | State Management |
+| React Router DOM | Routing |
+| Bootstrap | UI & Responsive Layout |
+| Material UI Charts | Data Visualization |
+| CSS Modules | Component Styling |
+| React Icons | Icons |
+
+---
+
+## 📂 Project Structure
+
+```bash
+src/
+│
+├── assets/
+│
+├── components/
+│   ├── Styles/
+│   ├── AddTransaction.jsx
+│   ├── Bargraph.jsx
+│   ├── Category.jsx
+│   ├── ColorSelector.jsx
+│   ├── CustomAlert.jsx
+│   ├── Footer.jsx
+│   ├── Header.jsx
+│   ├── History.jsx
+│   ├── Home.jsx
+│   ├── IconSelector.jsx
+│   ├── PieChart.jsx
+│   ├── TransactionItem.jsx
+│   └── Wallet.jsx
+│
+├── store/
+│   ├── categorySlice.js
+│   ├── transactionSlice.js
+│   ├── walletSlice.js
+│   ├── totalSlice.js
+│   ├── iconMap.js
+│   └── store.js
+│
+├── App.jsx
+├── App.css
+└── main.jsx
+```
+
+---
+
+## ⚙️ Redux State Management
+
+The application uses **Redux Toolkit** for centralized and scalable state management.
+
+### Store Slices
+- `transactionSlice` → Handles transactions
+- `categorySlice` → Manages categories
+- `walletSlice` → Wallet data
+- `totalSlice` → Income, expense & balance calculations
+
+---
+
+## 📈 Charts Used
+
+### Pie Chart
+Displays category-wise expense distribution.
+
+### Bar Graph
+Compares monthly income and expense using transaction dates.
+
+Library Used:
+
+```bash
+@mui/x-charts
+```
+
+---
+
+## 🎨 UI Design
+
+The UI focuses on:
+- Clean dashboard layout
+- Soft gradient backgrounds
+- Responsive design
+- Card-based components
+- Smooth hover effects
+- Premium color theme
+
+---
+
+## 🧠 Learning Outcomes
+
+Through this project, I learned:
+- React component architecture
+- Redux Toolkit state management
+- Dynamic chart integration
+- Responsive UI development
+- Reusable component design
+- Efficient data handling
+
+---
+
+## ▶️ Installation
+
+Clone the repository:
+
+```bash
+git clone <your-repository-link>
+```
+
+Go to project folder:
+
+```bash
+cd expense-tracker
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
+
+```bash
+npm run dev
+```
+
+---
+
+## 📸 Screenshots
+
+### Dashboard
+
+Add screenshots here:
+
+```md
+![Dashboard](./screenshots/dashboard.png)
+```
+
+---
+
+## 🔮 Future Improvements
+
+- User Authentication
+- Dark Mode
+- Export Transactions to PDF/CSV
+- Backend Integration
+- Cloud Database
+- Budget Planning System
+
+---
+
+## 👨‍💻 Author
+
+**Naga Kumar**  
+Undergraduate Student at IIT Kharagpur  
+Passionate about Web Development and UI Design
+
+LinkedIn:  
+https://www.linkedin.com/in/nagakumar-yan/
+
+---
+
+## ⭐ Project Summary
+
+Developed a modern Expense Tracker web application using React.js and Redux Toolkit featuring transaction management, category-wise analytics, wallet tracking, dynamic charts, and responsive UI using Bootstrap and Material UI Charts.

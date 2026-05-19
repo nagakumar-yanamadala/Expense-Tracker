@@ -1,38 +1,87 @@
 import styles from "./Styles/AddTransaction.module.css";
-
+import { Form } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 
 import { useRef, useState } from "react";
 
 import { addTransaction } from "../store/transactionSlice";
 
-import {incomeUpdate,expenseUpdate} from '../store/totalSlice';
+import { incomeUpdate, expenseUpdate } from "../store/totalSlice";
+
+import { updateWalletBalance } from "../store/walletSlice";
 
 import { iconMap } from "../store/iconMap";
+import CustomAlert from "./CustomAlert";
 
 const AddTransaction = () => {
   const wallets = useSelector((state) => state.wallets);
 
-  const totals = useSelector((state) => state.totals);
-
   const categories = useSelector((state) => state.categories);
+
+  const dispatch = useDispatch();
 
   const [isExpense, setIsExpense] = useState(true);
 
-  const selectedWallet = useRef();
-
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+
+  const [alertData, setAlertData] = useState({
+    isOpen: false,
+    type: "success",
+    title: "",
+    message: "",
+  });
+
+  const selectedWallet = useRef();
 
   const amount = useRef();
 
   const date = useRef();
 
-  const dispatch = useDispatch();
+  function showAlert(type, title, message) {
+    setAlertData({
+      isOpen: true,
+      type,
+      title,
+      message,
+    });
+  }
 
   function postTransaction(e) {
     e.preventDefault();
 
-    const Wallet = selectedWallet.current.value;
+    const WalletName = selectedWallet.current.value;
+
+    const Wallet = wallets.find((wallet) => wallet.name === WalletName);
+
+    const Category = categories.find(
+      (category) => category.name === selectedCategory.name,
+    );
+
+    const Amount = Number(amount.current.value);
+
+    if (!Amount || Amount <= 0) {
+      showAlert(
+        "error",
+        "Invalid Amount",
+        "Please enter a valid transaction amount.",
+      );
+      return;
+    }
+
+    if (!date.current.value) {
+      showAlert("error", "Date Required", "Please select a transaction date.");
+      return;
+    }
+
+    // check wallet balance BEFORE transaction
+    if (isExpense && Amount > Wallet.balance) {
+      showAlert(
+        "error",
+        "Transaction Failed",
+        "This wallet doesn't have sufficient balance.",
+      );
+      return;
+    }
 
     const str = date.current.value;
 
@@ -40,39 +89,60 @@ const AddTransaction = () => {
 
     const Date = `${day}-${month}-${year}`;
 
-    const Amount = amount.current.value;
-
     dispatch(
       addTransaction({
         Amount,
         isExpense,
         Date,
-
-        // store plain object only
-        Category: {
-          id: selectedCategory.id,
-          name: selectedCategory.name,
-          icon: selectedCategory.icon,
-        },
-
+        Category,
         Wallet,
       }),
     );
-    
-    if(isExpense){
-      dispatch(expenseUpdate(Amount))
-    }else{
-      dispatch(incomeUpdate(Amount))
+
+    // totals
+    if (isExpense) {
+      dispatch(expenseUpdate(Amount));
+    } else {
+      dispatch(incomeUpdate(Amount));
     }
 
+    // wallet balance
+    dispatch(
+      updateWalletBalance({
+        name: Wallet.name,
+        amount: isExpense ? -Amount : Amount,
+      }),
+    );
+
+    // clear fields
+    amount.current.value = "";
+    date.current.value = "";
+
+    showAlert(
+      "success",
+      "Transaction Added",
+      `${isExpense ? "Expense" : "Income"} added successfully to ${Wallet.name}.`,
+    );
   }
 
-  // convert icon string to component
   const SelectedIcon = iconMap[selectedCategory.icon];
 
   return (
     <div className={styles.container}>
-      <form className="container" onSubmit={postTransaction}>
+      <CustomAlert
+        isOpen={alertData.isOpen}
+        type={alertData.type}
+        title={alertData.title}
+        message={alertData.message}
+        onClose={() =>
+          setAlertData({
+            ...alertData,
+            isOpen: false,
+          })
+        }
+      />
+
+      <Form className="container" onSubmit={postTransaction}>
         <div className={`row ${styles.row1}`}>
           <div className="col">
             <label htmlFor="inputAmount" className="form-label">
@@ -131,12 +201,12 @@ const AddTransaction = () => {
               id="date"
               ref={date}
               style={{ cursor: "pointer" }}
+              required
             />
           </div>
         </div>
 
         <div className={`row ${styles.row1}`}>
-          {/* CATEGORY */}
           <div className="col">
             <label htmlFor="category" className="form-label">
               Select Category
@@ -201,7 +271,6 @@ const AddTransaction = () => {
             </div>
           </div>
 
-          {/* WALLET */}
           <div className="col">
             <label htmlFor="wallet" className="form-label">
               Select Wallet
@@ -211,7 +280,6 @@ const AddTransaction = () => {
               id="wallet"
               className="form-select"
               ref={selectedWallet}
-              defaultValue={wallets[0]}
               style={{ cursor: "pointer" }}
             >
               {wallets.map((wallet) => (
@@ -228,7 +296,7 @@ const AddTransaction = () => {
             Add Transaction
           </button>
         </div>
-      </form>
+      </Form>
     </div>
   );
 };

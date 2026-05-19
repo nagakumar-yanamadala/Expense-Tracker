@@ -13,7 +13,15 @@ function App() {
         flexDirection: "column",
       }}
     >
-      <Header />
+      <div
+        style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 1000,
+        }}
+      >
+        <Header />
+      </div>
 
       <main style={{ flex: 1 }}>
         <Outlet />

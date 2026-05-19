@@ -1,0 +1,184 @@
+.wrapper {
+  height: 38px;
+}
+
+/* Preview */
+
+.preview {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  height: 38px;
+
+  margin-right: 20px;
+}
+
+.colorPreview {
+  width: 32px;
+
+  height: 32px;
+
+  border-radius: 10px;
+
+  border: 2px solid white;
+
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Overlay */
+
+.overlay {
+  position: fixed;
+
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.35);
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  z-index: 1000;
+
+  backdrop-filter: blur(2px);
+}
+
+/* Popup */
+
+.colorContainer {
+  background: white;
+
+  width: 420px;
+
+  max-width: 90%;
+
+  border-radius: 22px;
+
+  padding: 24px;
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 16px;
+
+  justify-content: center;
+
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.15);
+
+  animation: popup 0.2s ease;
+}
+
+/* Color Card */
+
+.colorCard {
+  width: 52px;
+
+  height: 52px;
+
+  border-radius: 14px;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+
+  border: 3px solid transparent;
+
+  position: relative;
+}
+
+.colorCard:hover {
+  transform: scale(1.08);
+}
+
+/* Selected */
+
+.active {
+  border-color: #212529;
+
+  transform: scale(1.08);
+}
+
+/* Disabled */
+
+.disabled {
+  opacity: 0.35;
+
+  cursor: not-allowed;
+
+  filter: grayscale(40%);
+}
+
+.disabled:hover {
+  transform: none;
+}
+
+/* Cross */
+
+.cross {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 22px;
+
+  color: white;
+
+  font-weight: bold;
+
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.45);
+}
+
+/* Save Button */
+
+.saveBtn {
+  width: 100%;
+
+  margin-top: 10px;
+}
+
+/* Animation */
+
+@keyframes popup {
+  from {
+    transform: scale(0.92);
+
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+
+    opacity: 1;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 576px) {
+  .colorContainer {
+    gap: 12px;
+
+    padding: 18px;
+  }
+
+  .colorCard {
+    width: 46px;
+
+    height: 46px;
+  }
+}

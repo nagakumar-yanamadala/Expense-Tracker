@@ -7,12 +7,19 @@ const totalSlice = createSlice({
   initialState,
   reducers: {
     incomeUpdate: (state, action) => {
-        return {income:state.income+action.payload.amount,expense:state.expense,balance:state.balance+action.payload}
+        return {income:state.income+action.payload,expense:state.expense,balance:state.balance+action.payload}
     },
     expenseUpdate: (state, action) => {
-        return {income:state.income,expense:state.expense+action.payload.amount,balance:state.balance-action.payload}
-    }
+        return {income:state.income,expense:state.expense+action.payload,balance:state.balance-action.payload}
+    },
+    increaseBalance: (state, action) => {
+        return {income:state.income,expense:state.expense,balance:state.balance+action.payload}
+    },
+    decreaseBalance: (state, action) => {
+        return {income:state.income,expense:state.expense,balance:state.balance-action.payload}
+    },
+
   },
 });
-export const {incomeUpdate,expenseUpdate} = totalSlice.actions;
+export const {incomeUpdate,expenseUpdate,increaseBalance,decreaseBalance} = totalSlice.actions;
 export default totalSlice.reducer;

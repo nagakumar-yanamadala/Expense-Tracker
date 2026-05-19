@@ -1,43 +1,94 @@
-import "./Styles/ListItem.css";
 import styles from "./Styles/Category.module.css";
-import { addCategory, deleteCategory } from "../store/categorySlice";
+import {
+  addCategory,
+  deleteCategory,
+  pieChartColors,
+} from "../store/categorySlice";
+
 import { useSelector, useDispatch } from "react-redux";
+
 import { MdDelete, MdHelpOutline } from "react-icons/md";
+
 import IconSelector from "./IconSelector";
+import ColorSelector from "./ColorSelector";
+
 import { useRef, useState } from "react";
+
 import { iconMap } from "../store/iconMap";
+
+import CustomAlert from "./CustomAlert";
 
 function Category() {
   const categories = useSelector((state) => state.categories);
+
   const transactions = useSelector((state) => state.transactions);
-  const inputName = useRef();
-  const [icon, setIcon] = useState("FaUtensils");
+
   const dispatch = useDispatch();
+
+  const inputName = useRef();
+
+  const [icon, setIcon] = useState("FaUtensils");
+
+  const defaultAvailableColor =
+    pieChartColors.find(
+      (chartColor) =>
+        !categories.some(
+          (category) => category.color.primary === chartColor.primary,
+        ),
+    ) || pieChartColors[0];
+
+  const [color, setColor] = useState(defaultAvailableColor);
+
+  const [alertData, setAlertData] = useState({
+    isOpen: false,
+    type: "success",
+    title: "",
+    message: "",
+  });
+
+  function showAlert(type, title, message) {
+    setAlertData({
+      isOpen: true,
+      type,
+      title,
+      message,
+    });
+  }
 
   function handleSelectedIcon(selectedIcon) {
     setIcon(selectedIcon);
   }
 
   function handleDelete(category) {
-    // Optional chaining to prevent app crashing if Category object is undefined
     const arr = transactions.filter(
       (transaction) => transaction.Category?.name === category.name,
     );
 
-    if (arr.length === 0) {
-      dispatch(deleteCategory(category.id));
-    } else {
-      alert(
+    if (arr.length > 0) {
+      showAlert(
+        "error",
+        "Cannot Delete",
         `This category is used by ${arr.length} transactions. Delete those transactions first.`,
       );
+
+      return;
     }
+
+    dispatch(deleteCategory(category.id));
+
+    showAlert(
+      "success",
+      "Category Deleted",
+      `${category.name} category deleted successfully.`,
+    );
   }
 
   function handleAdd() {
     const categoryName = inputName.current.value.trim();
 
     if (!categoryName) {
-      alert("Enter category name");
+      showAlert("error", "Invalid Input", "Please enter a category name.");
+
       return;
     }
 
@@ -46,7 +97,12 @@ function Category() {
     );
 
     if (alreadyExists) {
-      alert("Category already exists");
+      showAlert(
+        "error",
+        "Category Exists",
+        "A category with this name already exists.",
+      );
+
       return;
     }
 
@@ -54,22 +110,58 @@ function Category() {
       addCategory({
         name: categoryName,
         icon: icon,
+        color: color,
       }),
     );
 
     inputName.current.value = "";
+
+    const nextAvailableColor =
+      pieChartColors.find(
+        (chartColor) =>
+          !categories.some(
+            (category) => category.color.primary === chartColor.primary,
+          ) && chartColor.primary !== color.primary,
+      ) || pieChartColors[0];
+
+    setColor(nextAvailableColor);
+
+    showAlert(
+      "success",
+      "Category Added",
+      `${categoryName} category added successfully.`,
+    );
   }
 
   return (
     <div className={`container ${styles.mainContainer}`}>
+      <CustomAlert
+        isOpen={alertData.isOpen}
+        type={alertData.type}
+        title={alertData.title}
+        message={alertData.message}
+        onClose={() =>
+          setAlertData({
+            ...alertData,
+            isOpen: false,
+          })
+        }
+      />
+
       <h1 className="text-center fw-bold m-4 text-dark">Category List</h1>
 
-      {/* Input Group Bar */}
       <div
         className={`input-group mb-4 p-2 shadow-sm ${styles.inputGroupWrapper}`}
       >
         <div className="d-flex align-items-center px-2">
           <IconSelector handleSelectedIcon={handleSelectedIcon} />
+        </div>
+
+        <div className="d-flex align-items-center px-2">
+          <ColorSelector
+            selectedColor={color}
+            handleSelectedColor={(selectedColor) => setColor(selectedColor)}
+          />
         </div>
 
         <input
@@ -88,7 +180,6 @@ function Category() {
         </button>
       </div>
 
-      {/* Category List Stack */}
       <div className="d-flex flex-column gap-3">
         {categories.map((category) => {
           const IconComponent = iconMap[category.icon] || MdHelpOutline;
@@ -99,9 +190,17 @@ function Category() {
               className={`d-flex justify-content-between align-items-center p-3 list-item ${styles.categoryCard}`}
             >
               <div className="d-flex align-items-center gap-3">
-                <div className={styles.iconContainer}>
+                <div
+                  className={styles.iconContainer}
+                  style={{
+                    backgroundColor: category.color.background,
+
+                    color: category.color.primary,
+                  }}
+                >
                   <IconComponent size={20} />
                 </div>
+
                 <span className={`fw-semibold ${styles.categoryText}`}>
                   {category.name}
                 </span>
@@ -110,7 +209,6 @@ function Category() {
               <button
                 className={styles.deleteBtn}
                 onClick={() => handleDelete(category)}
-                aria-label="Delete category"
               >
                 <MdDelete size={22} />
               </button>
