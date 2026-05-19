@@ -1,4 +1,4 @@
-# 💸 Expense Tracker App
+# Expense Tracker App
 
 A modern and responsive Expense Tracker web application built using **React.js** and **Redux Toolkit** with interactive charts, wallet management, category tracking, and smooth UI design.
 
